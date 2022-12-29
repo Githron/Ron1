@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="styles/flexbox-center-container.css" media="all">
   <link rel="stylesheet" href="styles/system-fonts.css" media="all">
   <link rel="stylesheet" href="styles/style.css" media="all">
+  <script>
+    window.addEventListener('load', () => document.querySelector('.code-container').appendChild(document.createTextNode(document.querySelector('.source-code').innerText)));
+  </script>
+  
 </head>
 
 <body>
@@ -51,38 +55,7 @@
 
 
 
-<div style="color: white; opacity: 0;">
-  <!script>
-    window.addEventListener('load', () => document.querySelector('.code-container').appendChild(document.createTextNode(document.querySelector('.source-code').innerText)));
-  </!script>
-  <!script class="source-code">
-    window.addEventListener('load', () => {
-      // noinspection JSUnresolvedVariable
-      let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      let xhr = new XMLHttpRequest();
-      xhr.open('GET', 'audioclip-1525698848000-79935.mp3');
-      xhr.responseType = 'arraybuffer';
-      xhr.addEventListener('load', () => {
-        let playsound = (audioBuffer) => {
-          let source = audioCtx.createBufferSource();
-          source.buffer = audioBuffer;
-          source.connect(audioCtx.destination);
-          source.loop = false;
-          source.start();
-
-          setTimeout(function () {
-            let t = document.createElement('p');
-            t.appendChild(document.createTextNode((new Date()).toLocaleString() + ': Sound played'));
-            document.querySelector('.output').appendChild(t);
-            playsound(audioBuffer);
-          }, 1000 + Math.random()*2500);
-        };
-
-        audioCtx.decodeAudioData(xhr.response).then(playsound);
-      });
-      xhr.send();
-    });
-  </!script>
+  
   </head>
   <body>
 
@@ -91,7 +64,6 @@
 
   <div class="output"></div>
   </body>
-</div>
 
 
 
